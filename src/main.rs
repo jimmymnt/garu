@@ -3,12 +3,6 @@ use std::{env, process};
 
 use redis::{Client, Commands, Connection, RedisResult};
 
-#[derive(Debug)]
-pub struct ScoreInfo<'a> {
-    member: &'a str,
-    score: u8,
-}
-
 pub struct RedisManager {
     connection: Connection,
 }
@@ -87,7 +81,7 @@ fn main() -> RedisResult<()> {
     // DESC: Descending
     // ASC: Ascending
     // Create a RedisManager instance and obtain the connection
-    let con_str = "rediss://default:b9dc5e0cc6fd4062aec3bdc287e4d697@apn1-bursting-glowworm-35229.upstash.io:35229";
+    let con_str = "<redis_url>";
     let mut manager = RedisManager::new(con_str.to_owned()).unwrap();
 
     let board_olp_manager = BoardOLPManager {
