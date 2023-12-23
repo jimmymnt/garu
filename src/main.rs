@@ -1,76 +1,11 @@
-#[allow(dead_code, unused_variables, unreachable_code, unused_must_use)]
 use std::{env, process};
 
-use redis::{Client, Commands, Connection, RedisResult};
+use board::board::{BoardOLPManager, Config};
+use redis::RedisResult;
+use rredis::rredis::RedisManager;
 
-pub struct RedisManager {
-    connection: Connection,
-}
-
-#[derive(Debug)]
-pub struct Config {
-    query: String,
-}
-
-impl Config {
-    pub fn build(mut args: impl Iterator<Item = String>) -> Result<Config, &'static str> {
-        args.next();
-        let query = match args.next() {
-            Some(query) => query,
-            None => return Err("Did not get a query string."),
-        };
-
-        Ok(Self { query })
-    }
-}
-
-pub trait BoardManager {
-    fn board_info(&self) -> Vec<(f32, &str)>;
-}
-
-pub struct BoardOLPManager {
-    key: String,
-}
-
-impl BoardManager for BoardOLPManager {
-    // Return to add multiple members to the leaderboard.
-    fn board_info(&self) -> Vec<(f32, &str)> {
-        vec![
-            (90.0, "Jimmy"),
-            (100.0, "Robert"),
-            (60.0, "Lee"),
-            (20.0, "Andrew"),
-            (50.0, "Ander"),
-        ]
-    }
-}
-
-impl BoardOLPManager {
-    pub fn set_board(&self, con: &mut Connection) {
-        let board_info = self.board_info();
-        // Use Sorted Set in Redis to store leaderboard score
-        let _: () = con.zadd_multiple("olp_v1", &board_info).unwrap();
-    }
-
-    pub fn get_board(&self, query: String, con: &mut Connection) {
-        let resp: Vec<(String, u32)>;
-        if query.to_lowercase() == "asc" {
-            resp = con.zrange_withscores(&self.key, 0, -1).unwrap();
-        } else {
-            resp = con.zrevrange_withscores(&self.key, 0, -1).unwrap();
-        }
-        dbg!(resp);
-    }
-}
-
-impl RedisManager {
-    // Create a new instance of RedisManager with a connection
-    pub fn new(con_str: String) -> RedisResult<Self> {
-        let client = Client::open(con_str).unwrap();
-        let connection = client.get_connection().unwrap();
-        Ok(Self { connection })
-    }
-}
+pub mod board;
+pub mod rredis;
 
 fn main() -> RedisResult<()> {
     let config = Config::build(env::args()).unwrap_or_else(|err| {
