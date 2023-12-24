@@ -1,0 +1,124 @@
+{
+  "users": [
+    {
+      "created_at": "2023-12-23T12:00:16.215Z",
+      "updated_at": "2023-12-23T13:06:36.051Z",
+      "email": "Vern_Gorczany31@gmail.com",
+      "first_name": "Jace",
+      "last_name": "Keeling",
+      "id": 1
+    },
+    {
+      "created_at": "2023-12-23T14:11:20.431Z",
+      "updated_at": "2023-12-23T15:29:09.170Z",
+      "email": "Elliott.Willms@hotmail.com",
+      "first_name": "Chance",
+      "last_name": "Monahan",
+      "id": 2
+    },
+    {
+      "created_at": "2023-12-24T07:24:34.354Z",
+      "updated_at": "2023-12-23T13:56:17.273Z",
+      "email": "Krystel30@yahoo.com",
+      "first_name": "Felton",
+      "last_name": "Johnson",
+      "id": 3
+    },
+    {
+      "created_at": "2023-12-24T00:09:10.206Z",
+      "updated_at": "2023-12-23T14:03:54.799Z",
+      "email": "Kyla94@gmail.com",
+      "first_name": "Kyra",
+      "last_name": "Wilkinson",
+      "id": 4
+    },
+    {
+      "created_at": "2023-12-23T20:12:57.723Z",
+      "updated_at": "2023-12-24T01:44:26.613Z",
+      "email": "Reed.Daugherty@hotmail.com",
+      "first_name": "Audie",
+      "last_name": "Armstrong",
+      "id": 5
+    },
+    {
+      "created_at": "2023-12-24T08:12:03.395Z",
+      "updated_at": "2023-12-23T23:15:24.926Z",
+      "email": "Eriberto.Crooks@yahoo.com",
+      "first_name": "Velda",
+      "last_name": "Schaden",
+      "id": 6
+    },
+    {
+      "created_at": "2023-12-24T04:18:48.566Z",
+      "updated_at": "2023-12-24T01:50:03.156Z",
+      "email": "Rosario.Gerhold@gmail.com",
+      "first_name": "Linnie",
+      "last_name": "Will",
+      "id": 7
+    },
+    {
+      "created_at": "2023-12-24T02:57:43.244Z",
+      "updated_at": "2023-12-23T11:09:06.264Z",
+      "email": "Cale_Luettgen@yahoo.com",
+      "first_name": "Adam",
+      "last_name": "Klein",
+      "id": 8
+    },
+    {
+      "created_at": "2023-12-24T05:16:55.750Z",
+      "updated_at": "2023-12-23T21:47:01.024Z",
+      "email": "Elta.Stiedemann@gmail.com",
+      "first_name": "Armani",
+      "last_name": "Moore",
+      "id": 9
+    },
+    {
+      "created_at": "2023-12-24T00:44:25.731Z",
+      "updated_at": "2023-12-23T19:16:57.822Z",
+      "email": "Shea.VonRueden36@yahoo.com",
+      "first_name": "Roger",
+      "last_name": "Flatley",
+      "id": 10
+    },
+    {
+      "created_at": "2023-12-24T08:33:06.639Z",
+      "updated_at": "2023-12-24T06:56:47.645Z",
+      "email": "Mary.Osinski@gmail.com",
+      "first_name": "Ova",
+      "last_name": "O'Kon",
+      "id": 11
+    },
+    {
+      "created_at": "2023-12-23T18:35:34.972Z",
+      "updated_at": "2023-12-23T09:49:35.332Z",
+      "email": "Rafael_Nitzsche77@gmail.com",
+      "first_name": "Verla",
+      "last_name": "Sawayn",
+      "id": 12
+    },
+    {
+      "created_at": "2023-12-23T12:34:42.965Z",
+      "updated_at": "2023-12-24T07:13:23.220Z",
+      "email": "Okey_Veum74@yahoo.com",
+      "first_name": "Maeve",
+      "last_name": "Block",
+      "id": 13
+    },
+    {
+      "created_at": "2023-12-23T14:02:28.829Z",
+      "updated_at": "2023-12-23T17:28:22.945Z",
+      "email": "Mohammad2@hotmail.com",
+      "first_name": "Wellington",
+      "last_name": "O'Reilly",
+      "id": 14
+    },
+    {
+      "created_at": "2023-12-24T01:07:47.803Z",
+      "updated_at": "2023-12-23T13:21:48.239Z",
+      "email": "Percy2@yahoo.com",
+      "first_name": "Neoma",
+      "last_name": "Kilback",
+      "id": 15
+    }
+  ]
+}

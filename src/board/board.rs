@@ -1,6 +1,7 @@
-use std::io::Error;
+use std::{error::Error, io::BufReader};
 
 use redis::{Commands, Connection};
+use serde::Deserialize;
 
 #[derive(Debug)]
 pub struct Config {
@@ -19,8 +20,19 @@ impl Config {
     }
 }
 
+#[derive(Debug, Deserialize)]
+pub struct Member {
+    member: String,
+    score: u32,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct BoardInfo {
+    pub info: Vec<Member>,
+}
+
 pub trait BoardManager {
-    fn board_info(&self) -> Vec<(f32, String)>;
+    fn board_info(&self) -> BoardInfo;
 }
 
 pub struct BoardOLPManager {
@@ -29,7 +41,7 @@ pub struct BoardOLPManager {
 
 impl BoardManager for BoardOLPManager {
     // Return to add multiple members to the leaderboard.
-    fn board_info(&self) -> Vec<(f32, String)> {
+    fn board_info(&self) -> BoardInfo {
         self.get_data_from_json_file().unwrap()
     }
 }
@@ -38,7 +50,12 @@ impl BoardOLPManager {
     pub fn set_board(&self, con: &mut Connection) {
         let board_info = self.board_info();
         // Use Sorted Set in Redis to store leaderboard score
-        let _: () = con.zadd_multiple(&self.key, &board_info).unwrap();
+        let mut data = vec![];
+        for item in board_info.info {
+            data.push((item.score, item.member));
+        }
+
+        let _: () = con.zadd_multiple(&self.key, &data).unwrap();
     }
 
     pub fn get_board(&self, query: String, con: &mut Connection) {
@@ -51,26 +68,11 @@ impl BoardOLPManager {
         dbg!(resp);
     }
 
-    pub fn get_data_from_json_file(&self) -> Result<Vec<(f32, String)>, Error> {
-        let mut members = Vec::new();
-        let file =
-            std::fs::File::open("../../assets/data.json").expect("file should open read only");
+    pub fn get_data_from_json_file(&self) -> Result<BoardInfo, Box<dyn Error>> {
+        let file = std::fs::File::open("../../assets/data.json")?;
+        let reader = BufReader::new(file);
 
-        let json: serde_json::Value =
-            serde_json::from_reader(file).expect("file should be proper JSON");
-
-        for member in json.as_array().unwrap() {
-            // println!(
-            //     "{:?} - {:?}",
-            //     member.get("name").unwrap().to_string(),
-            //     member.get("score").unwrap().as_f64().unwrap(),
-            // );
-            members.push((
-                member.get("score").unwrap().as_f64().unwrap() as f32,
-                member.get("name").unwrap().to_string().replace("\"", ""),
-            ));
-        }
-
-        Ok(members)
+        let board = serde_json::from_reader(reader)?;
+        Ok(board)
     }
 }
