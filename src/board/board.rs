@@ -67,7 +67,7 @@ impl BoardOLPManager {
             // );
             members.push((
                 member.get("score").unwrap().as_f64().unwrap() as f32,
-                member.get("name").unwrap().to_string(),
+                member.get("name").unwrap().to_string().replace("\"", ""),
             ));
         }
 
