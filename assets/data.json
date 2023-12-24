@@ -1,12 +1,22 @@
-{
-  "name": "John Doe",
-  "age": 43,
-  "address": {
-    "street": "10 Downing Street",
-    "city": "London"
+[
+  {
+    "name": "John Doe",
+    "score": 43
   },
-  "phones": [
-    "+44 1234567",
-    "+44 2345678"
-  ]
-}
+  {
+    "name": "James",
+    "score": 89
+  },
+  {
+    "name": "Chris",
+    "score": 100
+  },
+  {
+    "name": "Terry",
+    "score": 112
+  },
+  {
+    "name": "Tommy",
+    "score": 120
+  }
+]
