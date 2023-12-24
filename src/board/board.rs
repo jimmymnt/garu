@@ -1,3 +1,5 @@
+use std::io::Error;
+
 use redis::{Commands, Connection};
 
 #[derive(Debug)]
@@ -18,7 +20,7 @@ impl Config {
 }
 
 pub trait BoardManager {
-    fn board_info(&self) -> Vec<(f32, &str)>;
+    fn board_info(&self) -> Vec<(f32, String)>;
 }
 
 pub struct BoardOLPManager {
@@ -27,14 +29,8 @@ pub struct BoardOLPManager {
 
 impl BoardManager for BoardOLPManager {
     // Return to add multiple members to the leaderboard.
-    fn board_info(&self) -> Vec<(f32, &str)> {
-        vec![
-            (90.0, "Jimmy"),
-            (100.0, "Robert"),
-            (60.0, "Lee"),
-            (20.0, "Andrew"),
-            (50.0, "Ander"),
-        ]
+    fn board_info(&self) -> Vec<(f32, String)> {
+        self.get_data_from_json_file().unwrap()
     }
 }
 
@@ -53,5 +49,28 @@ impl BoardOLPManager {
             resp = con.zrevrange_withscores(&self.key, 0, -1).unwrap();
         }
         dbg!(resp);
+    }
+
+    pub fn get_data_from_json_file(&self) -> Result<Vec<(f32, String)>, Error> {
+        let mut members = Vec::new();
+        let file =
+            std::fs::File::open("../../assets/data.json").expect("file should open read only");
+
+        let json: serde_json::Value =
+            serde_json::from_reader(file).expect("file should be proper JSON");
+
+        for member in json.as_array().unwrap() {
+            // println!(
+            //     "{:?} - {:?}",
+            //     member.get("name").unwrap().to_string(),
+            //     member.get("score").unwrap().as_f64().unwrap(),
+            // );
+            members.push((
+                member.get("score").unwrap().as_f64().unwrap() as f32,
+                member.get("name").unwrap().to_string(),
+            ));
+        }
+
+        Ok(members)
     }
 }
