@@ -23,6 +23,7 @@ fn main() -> RedisResult<()> {
         key: "olp_v1".to_owned(),
     };
 
+    // Set board before if needed.
     // board_olp_manager.set_board(&mut manager.connection);
     board_olp_manager.get_board(config.query, &mut manager.connection);
 
