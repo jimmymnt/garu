@@ -1,22 +1,24 @@
-[
-  {
-    "name": "John Doe",
-    "score": 43
-  },
-  {
-    "name": "James",
-    "score": 89
-  },
-  {
-    "name": "Chris",
-    "score": 100
-  },
-  {
-    "name": "Terry",
-    "score": 112
-  },
-  {
-    "name": "Tommy",
-    "score": 120
-  }
-]
+{
+  "info": [
+    {
+      "member": "John Doe",
+      "score": 43
+    },
+    {
+      "member": "James",
+      "score": 89
+    },
+    {
+      "member": "Chris",
+      "score": 100
+    },
+    {
+      "member": "Terry",
+      "score": 112
+    },
+    {
+      "member": "Tommy",
+      "score": 120
+    }
+  ]
+}
