@@ -16,7 +16,7 @@ fn main() -> RedisResult<()> {
     // DESC: Descending
     // ASC: Ascending
     // Create a RedisManager instance and obtain the connection
-    let con_str = "<redis_url>";
+    let con_str = "rediss://default:3fbd3482b74b46318bb5700bf0e8b8ae@apn1-bursting-glowworm-35229.upstash.io:35229";
     let mut manager = RedisManager::new(con_str.to_owned()).unwrap();
 
     let board_olp_manager = BoardOLPManager {
