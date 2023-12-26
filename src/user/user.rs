@@ -3,6 +3,8 @@ use std::{error::Error, fs::File, io::BufReader};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
+use crate::rredis::rredis::RedisManager;
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct User {
     id: Uuid,
@@ -48,9 +50,10 @@ impl User {
             first_name,
             last_name,
             email,
-            created_at: "test".to_owned(),
-            updated_at: "test".to_owned(),
+            created_at: "tmp".to_owned(),
+            updated_at: "tmp".to_owned(),
         };
+
         user
     }
 }

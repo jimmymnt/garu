@@ -36,7 +36,7 @@ pub trait BoardManager {
 }
 
 pub struct BoardOLPManager {
-    pub key: String,
+    key: String,
 }
 
 impl BoardManager for BoardOLPManager {
@@ -47,6 +47,14 @@ impl BoardManager for BoardOLPManager {
 }
 
 impl BoardOLPManager {
+    pub fn new(key: String) -> Self {
+        Self { key }
+    }
+
+    pub fn get_key(&self) -> &String {
+        &self.key
+    }
+
     pub fn set_board(&self, con: &mut Connection) {
         let board_info = self.board_info();
         // Use Sorted Set in Redis to store leaderboard score
