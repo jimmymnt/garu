@@ -1,3 +1,5 @@
+use std::fmt::Debug;
+
 #[allow(unused_variables)]
 #[derive(Debug)]
 pub struct MinHeap<T> {
@@ -6,10 +8,10 @@ pub struct MinHeap<T> {
 
 impl<T> MinHeap<T>
 where
-    T: Copy + Ord,
+    T: Ord + Copy + Debug,
 {
-    pub fn new() -> Self {
-        Self { data: vec![] }
+    pub fn new(v: Vec<T>) -> Self {
+        Self { data: v }
     }
 
     pub fn insert(&mut self, element: T) {
@@ -39,5 +41,91 @@ where
 
     pub fn get_right_child(&self, index: usize) -> usize {
         2 * index + 2
+    }
+
+    pub fn top(&mut self) -> Option<T> {
+        if self.is_empty() {
+            return None;
+        }
+
+        let root = self.data.swap_remove(0);
+
+        self.heapify(0);
+
+        Some(root)
+    }
+
+    /// Binary Tree to MinHeap
+    pub fn heapify(&mut self, index: usize) {
+        // [22, 25, 12, 10, 23]
+        //   0  1   2   3   4
+        //   Binary Tree
+        //           22
+        //          /  \
+        //         25  12
+        //        / \
+        //      10  23
+        //
+        //   Heap would be:
+        //          22
+        //  ---
+        //          22
+        //          / \
+        //        25   12
+        //  ---
+        //          12 swap(22, 12)
+        //         /  \
+        //        25  22
+        //
+        //  ---
+        //          12
+        //         /  \
+        //        25  22 swap(25, 10
+        //       /
+        //      10
+        //  ---
+        //          12
+        //         /  \
+        //        10  22
+        //       /
+        //      25
+        //
+        //  ---
+        //           10 swap(10, 12)
+        //          /  \
+        //         12  22
+        //        / \
+        //       25  23
+        //  ---
+        println!("heap now is: {:?}", self.data);
+        let mut current_idx = index;
+
+        println!("current_idx is {current_idx}");
+        let len_heap = self.data.len();
+
+        let left_child_idx = self.get_left_child(index);
+        let right_child_idx = self.get_right_child(index);
+
+        if left_child_idx < len_heap && self.data[left_child_idx] < self.data[current_idx] {
+            current_idx = left_child_idx;
+        }
+
+        if right_child_idx < len_heap && self.data[right_child_idx] < self.data[current_idx] {
+            current_idx = right_child_idx;
+        }
+
+        if current_idx != index {
+            self.data.swap(index, current_idx);
+            self.heapify(current_idx);
+        }
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.data.len() == 0
+    }
+
+    /// Get the root element in Heap and don't remove it.
+    pub fn peek(&self) -> Option<T> {
+        None
     }
 }
