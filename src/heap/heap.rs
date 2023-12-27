@@ -10,8 +10,8 @@ impl<T> MinHeap<T>
 where
     T: Ord + Copy + Debug,
 {
-    pub fn new(v: Vec<T>) -> Self {
-        Self { data: v }
+    pub fn new() -> Self {
+        Self { data: vec![] }
     }
 
     pub fn insert(&mut self, element: T) {
