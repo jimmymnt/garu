@@ -66,41 +66,20 @@ where
         //        / \
         //      10  23
         //
-        //   Heap would be:
-        //          22
-        //  ---
-        //          22
-        //          / \
-        //        25   12
-        //  ---
-        //          12 swap(22, 12)
-        //         /  \
-        //        25  22
-        //
-        //  ---
-        //          12
-        //         /  \
-        //        25  22 swap(25, 10
-        //       /
-        //      10
-        //  ---
-        //          12
-        //         /  \
-        //        10  22
-        //       /
-        //      25
-        //
-        //  ---
-        //           10 swap(10, 12)
+        //   Min-Heap would be:
+        //           22
         //          /  \
-        //         12  22
+        //         10  12 swap(25, 10)
         //        / \
-        //       25  23
+        //      25  23
         //  ---
-        println!("heap now is: {:?}", self.data);
+        //           10
+        //          /  \
+        //         22  12 swap(22, 10)
+        //        / \
+        //      25  23
+        //  ---
         let mut current_idx = index;
-
-        println!("current_idx is {current_idx}");
         let len_heap = self.data.len();
 
         let left_child_idx = self.get_left_child(index);
