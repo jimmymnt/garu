@@ -8,7 +8,7 @@ pub struct MinHeap<T> {
 
 impl<T> MinHeap<T>
 where
-    T: Ord + Copy + Debug,
+    T: Ord + Copy + Debug + PartialEq,
 {
     pub fn new() -> Self {
         Self { data: vec![] }
@@ -104,7 +104,64 @@ where
     }
 
     /// Get the root element in Heap and don't remove it.
-    pub fn peek(&self) -> Option<T> {
-        None
+    pub fn peek(&self) -> Option<&T> {
+        self.data.get(0)
+    }
+}
+
+mod test {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let mut heap = MinHeap::<i32>::new();
+        heap.insert(12);
+        heap.insert(22);
+        heap.insert(2);
+        heap.insert(-1);
+        heap.insert(-3);
+
+        assert_eq!(heap.data, vec![-3, -1, 12, 22, 2]);
+    }
+
+    #[test]
+    fn it_gets_top() {
+        let mut heap = MinHeap::<i32>::new();
+        heap.insert(12);
+        heap.insert(22);
+        heap.insert(2);
+        heap.insert(-1);
+        heap.insert(-3);
+
+        let top = heap.top();
+        assert_eq!(top, Some(-3));
+    }
+
+    #[test]
+    fn it_top_and_heapifies() {
+        let mut heap = MinHeap::<i32>::new();
+        heap.insert(12);
+        heap.insert(22);
+        heap.insert(2);
+        heap.insert(-1);
+        heap.insert(-3);
+
+        let top = heap.top();
+        assert_eq!(top, Some(-3));
+        assert_eq!(heap.data, vec![-1, 2, 12, 22]);
+    }
+
+    #[test]
+    fn it_gets_root_and_stays() {
+        let mut heap = MinHeap::<i32>::new();
+        heap.insert(12);
+        heap.insert(22);
+        heap.insert(2);
+        heap.insert(-1);
+        heap.insert(-3);
+
+        let peek = heap.peek();
+        assert_eq!(peek, Some(-3).as_ref());
+        assert_eq!(heap.data, vec![-3, -1, 12, 22, 2]);
     }
 }
